@@ -98,11 +98,12 @@ Machines set up in the cluster to run containers. Usually managed by administrat
                   
 1. Configure Global Tools
 
-* maven -> jenkins defaults
+    * maven -> jenkins defaults
+    
+    * jdk8 -> from https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_linux_hotspot_8u222b10.tar.gz
 
-* jdk8 -> from https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_linux_hotspot_8u222b10.tar.gz
+1. Set up build pipeline
 
-* Setup new pipeline-build from https://github.com:rebaze/Learn-OpenShift/                  
-                
-                                              
+    * Setup new pipeline-build from https://github.com:rebaze/Learn-OpenShift/                  
+                           
                           
