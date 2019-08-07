@@ -90,3 +90,19 @@ Machines set up in the cluster to run containers. Usually managed by administrat
 
     > oc delete all  --selector app=fruits
     > oc delete all  --selector app=my-database
+                    
+## Jenkins integration
+
+1. Install jenkins instance
+    > oc new-app jenkins-persistent
+                  
+1. Configure Global Tools
+
+* maven -> jenkins defaults
+
+* jdk8 -> from https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_linux_hotspot_8u222b10.tar.gz
+
+* Setup new pipeline-build from https://github.com:rebaze/Learn-OpenShift/                  
+                
+                                              
+                          
