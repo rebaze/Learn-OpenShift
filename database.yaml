@@ -1,0 +1,388 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubernetes.io/limit-ranger: 'LimitRanger plugin set: cpu, memory request for
+        container my-database; cpu, memory limit for container my-database'
+      openshift.io/deployment-config.latest-version: "1"
+      openshift.io/deployment-config.name: my-database
+      openshift.io/deployment.name: my-database-1
+      openshift.io/generated-by: OpenShiftNewApp
+      openshift.io/scc: restricted
+    creationTimestamp: "2019-08-06T14:54:09Z"
+    generateName: my-database-1-
+    labels:
+      app: my-database
+      deployment: my-database-1
+      deploymentconfig: my-database
+    name: my-database-1-4n2v5
+    namespace: rascal
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicationController
+      name: my-database-1
+      uid: 097cbc25-b85a-11e9-9669-0601fd422288
+    resourceVersion: "421339020"
+    selfLink: /api/v1/namespaces/rascal/pods/my-database-1-4n2v5
+    uid: 0c038da9-b85a-11e9-9669-0601fd422288
+  spec:
+    containers:
+    - env:
+      - name: POSTGRESQL_DATABASE
+        value: my_data
+      - name: POSTGRESQL_PASSWORD
+        value: secret
+      - name: POSTGRESQL_USER
+        value: luke
+      image: openshift/postgresql-92-centos7@sha256:dbd4b6fef477e49bff9703ee70d20a2c48f68023562ebecc264d0b87a7fa270e
+      imagePullPolicy: Always
+      name: my-database
+      ports:
+      - containerPort: 5432
+        protocol: TCP
+      resources:
+        limits:
+          cpu: "1"
+          memory: 512Mi
+        requests:
+          cpu: 30m
+          memory: 409Mi
+      securityContext:
+        capabilities:
+          drop:
+          - KILL
+          - MKNOD
+          - NET_RAW
+          - SETGID
+          - SETUID
+        runAsUser: 1006250000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/lib/pgsql/data
+        name: my-database-volume-1
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-cz4dl
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    imagePullSecrets:
+    - name: default-dockercfg-8plj4
+    nodeName: ip-172-31-56-237.eu-west-1.compute.internal
+    nodeSelector:
+      type: compute
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 1006250000
+      seLinuxOptions:
+        level: s0:c79,c44
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    volumes:
+    - emptyDir: {}
+      name: my-database-volume-1
+    - name: default-token-cz4dl
+      secret:
+        defaultMode: 420
+        secretName: default-token-cz4dl
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2019-08-06T14:54:10Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2019-08-06T14:54:28Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: null
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2019-08-06T14:54:09Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://30547b5c3b355b5fae835d76a277eb18aa6d6bd2de8446322e997e07af3db94d
+      image: docker.io/openshift/postgresql-92-centos7@sha256:dbd4b6fef477e49bff9703ee70d20a2c48f68023562ebecc264d0b87a7fa270e
+      imageID: docker-pullable://docker.io/openshift/postgresql-92-centos7@sha256:dbd4b6fef477e49bff9703ee70d20a2c48f68023562ebecc264d0b87a7fa270e
+      lastState: {}
+      name: my-database
+      ready: true
+      restartCount: 0
+      state:
+        running:
+          startedAt: "2019-08-06T14:54:28Z"
+    hostIP: 172.31.56.237
+    phase: Running
+    podIP: 10.129.25.15
+    qosClass: Burstable
+    startTime: "2019-08-06T14:54:10Z"
+- apiVersion: v1
+  kind: ReplicationController
+  metadata:
+    annotations:
+      openshift.io/deployer-pod.completed-at: 2019-08-06 14:54:29 +0000 UTC
+      openshift.io/deployer-pod.created-at: 2019-08-06 14:54:05 +0000 UTC
+      openshift.io/deployer-pod.name: my-database-1-deploy
+      openshift.io/deployment-config.latest-version: "1"
+      openshift.io/deployment-config.name: my-database
+      openshift.io/deployment.phase: Complete
+      openshift.io/deployment.replicas: "1"
+      openshift.io/deployment.status-reason: config change
+      openshift.io/encoded-deployment-config: |
+        {"kind":"DeploymentConfig","apiVersion":"apps.openshift.io/v1","metadata":{"name":"my-database","namespace":"rascal","selfLink":"/apis/apps.openshift.io/v1/namespaces/rascal/deploymentconfigs/my-database","uid":"08e3e3e6-b85a-11e9-930d-0645a759894e","resourceVersion":"421338786","generation":2,"creationTimestamp":"2019-08-06T14:54:04Z","labels":{"app":"my-database"},"annotations":{"openshift.io/generated-by":"OpenShiftNewApp"}},"spec":{"strategy":{"type":"Rolling","rollingParams":{"updatePeriodSeconds":1,"intervalSeconds":1,"timeoutSeconds":600,"maxUnavailable":"25%","maxSurge":"25%"},"resources":{},"activeDeadlineSeconds":21600},"triggers":[{"type":"ConfigChange"},{"type":"ImageChange","imageChangeParams":{"automatic":true,"containerNames":["my-database"],"from":{"kind":"ImageStreamTag","namespace":"rascal","name":"my-database:latest"},"lastTriggeredImage":"openshift/postgresql-92-centos7@sha256:dbd4b6fef477e49bff9703ee70d20a2c48f68023562ebecc264d0b87a7fa270e"}}],"replicas":1,"revisionHistoryLimit":10,"test":false,"selector":{"app":"my-database","deploymentconfig":"my-database"},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"my-database","deploymentconfig":"my-database"},"annotations":{"openshift.io/generated-by":"OpenShiftNewApp"}},"spec":{"volumes":[{"name":"my-database-volume-1","emptyDir":{}}],"containers":[{"name":"my-database","image":"openshift/postgresql-92-centos7@sha256:dbd4b6fef477e49bff9703ee70d20a2c48f68023562ebecc264d0b87a7fa270e","ports":[{"containerPort":5432,"protocol":"TCP"}],"env":[{"name":"POSTGRESQL_DATABASE","value":"my_data"},{"name":"POSTGRESQL_PASSWORD","value":"secret"},{"name":"POSTGRESQL_USER","value":"luke"}],"resources":{},"volumeMounts":[{"name":"my-database-volume-1","mountPath":"/var/lib/pgsql/data"}],"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","imagePullPolicy":"Always"}],"restartPolicy":"Always","terminationGracePeriodSeconds":30,"dnsPolicy":"ClusterFirst","securityContext":{},"schedulerName":"default-scheduler"}}},"status":{"latestVersion":1,"observedGeneration":1,"replicas":0,"updatedReplicas":0,"availableReplicas":0,"unavailableReplicas":0,"details":{"message":"config change","causes":[{"type":"ConfigChange"}]},"conditions":[{"type":"Available","status":"False","lastUpdateTime":"2019-08-06T14:54:04Z","lastTransitionTime":"2019-08-06T14:54:04Z","message":"Deployment config does not have minimum availability."}]}}
+    creationTimestamp: "2019-08-06T14:54:05Z"
+    generation: 2
+    labels:
+      app: my-database
+      openshift.io/deployment-config.name: my-database
+    name: my-database-1
+    namespace: rascal
+    ownerReferences:
+    - apiVersion: apps.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DeploymentConfig
+      name: my-database
+      uid: 08e3e3e6-b85a-11e9-930d-0645a759894e
+    resourceVersion: "421339031"
+    selfLink: /api/v1/namespaces/rascal/replicationcontrollers/my-database-1
+    uid: 097cbc25-b85a-11e9-9669-0601fd422288
+  spec:
+    replicas: 1
+    selector:
+      app: my-database
+      deployment: my-database-1
+      deploymentconfig: my-database
+    template:
+      metadata:
+        annotations:
+          openshift.io/deployment-config.latest-version: "1"
+          openshift.io/deployment-config.name: my-database
+          openshift.io/deployment.name: my-database-1
+          openshift.io/generated-by: OpenShiftNewApp
+        creationTimestamp: null
+        labels:
+          app: my-database
+          deployment: my-database-1
+          deploymentconfig: my-database
+      spec:
+        containers:
+        - env:
+          - name: POSTGRESQL_DATABASE
+            value: my_data
+          - name: POSTGRESQL_PASSWORD
+            value: secret
+          - name: POSTGRESQL_USER
+            value: luke
+          image: openshift/postgresql-92-centos7@sha256:dbd4b6fef477e49bff9703ee70d20a2c48f68023562ebecc264d0b87a7fa270e
+          imagePullPolicy: Always
+          name: my-database
+          ports:
+          - containerPort: 5432
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/lib/pgsql/data
+            name: my-database-volume-1
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - emptyDir: {}
+          name: my-database-volume-1
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 2
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewApp
+    creationTimestamp: "2019-08-06T14:54:04Z"
+    labels:
+      app: my-database
+    name: my-database
+    namespace: rascal
+    resourceVersion: "421338765"
+    selfLink: /api/v1/namespaces/rascal/services/my-database
+    uid: 08ebca7a-b85a-11e9-930d-0645a759894e
+  spec:
+    clusterIP: 172.30.70.206
+    ports:
+    - name: 5432-tcp
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+    selector:
+      app: my-database
+      deploymentconfig: my-database
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: apps.openshift.io/v1
+  kind: DeploymentConfig
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewApp
+    creationTimestamp: "2019-08-06T14:54:04Z"
+    generation: 2
+    labels:
+      app: my-database
+    name: my-database
+    namespace: rascal
+    resourceVersion: "421339034"
+    selfLink: /apis/apps.openshift.io/v1/namespaces/rascal/deploymentconfigs/my-database
+    uid: 08e3e3e6-b85a-11e9-930d-0645a759894e
+  spec:
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      app: my-database
+      deploymentconfig: my-database
+    strategy:
+      activeDeadlineSeconds: 21600
+      resources: {}
+      rollingParams:
+        intervalSeconds: 1
+        maxSurge: 25%
+        maxUnavailable: 25%
+        timeoutSeconds: 600
+        updatePeriodSeconds: 1
+      type: Rolling
+    template:
+      metadata:
+        annotations:
+          openshift.io/generated-by: OpenShiftNewApp
+        creationTimestamp: null
+        labels:
+          app: my-database
+          deploymentconfig: my-database
+      spec:
+        containers:
+        - env:
+          - name: POSTGRESQL_DATABASE
+            value: my_data
+          - name: POSTGRESQL_PASSWORD
+            value: secret
+          - name: POSTGRESQL_USER
+            value: luke
+          image: openshift/postgresql-92-centos7@sha256:dbd4b6fef477e49bff9703ee70d20a2c48f68023562ebecc264d0b87a7fa270e
+          imagePullPolicy: Always
+          name: my-database
+          ports:
+          - containerPort: 5432
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/lib/pgsql/data
+            name: my-database-volume-1
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - emptyDir: {}
+          name: my-database-volume-1
+    test: false
+    triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - my-database
+        from:
+          kind: ImageStreamTag
+          name: my-database:latest
+          namespace: rascal
+        lastTriggeredImage: openshift/postgresql-92-centos7@sha256:dbd4b6fef477e49bff9703ee70d20a2c48f68023562ebecc264d0b87a7fa270e
+      type: ImageChange
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2019-08-06T14:54:28Z"
+      lastUpdateTime: "2019-08-06T14:54:28Z"
+      message: Deployment config has minimum availability.
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2019-08-06T14:54:10Z"
+      lastUpdateTime: "2019-08-06T14:54:29Z"
+      message: replication controller "my-database-1" successfully rolled out
+      reason: NewReplicationControllerAvailable
+      status: "True"
+      type: Progressing
+    details:
+      causes:
+      - type: ConfigChange
+      message: config change
+    latestVersion: 1
+    observedGeneration: 2
+    readyReplicas: 1
+    replicas: 1
+    unavailableReplicas: 0
+    updatedReplicas: 1
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewApp
+      openshift.io/image.dockerRepositoryCheck: "2019-08-06T14:54:05Z"
+    creationTimestamp: "2019-08-06T14:54:04Z"
+    generation: 2
+    labels:
+      app: my-database
+    name: my-database
+    namespace: rascal
+    resourceVersion: "421338780"
+    selfLink: /apis/image.openshift.io/v1/namespaces/rascal/imagestreams/my-database
+    uid: 08dc9584-b85a-11e9-930d-0645a759894e
+  spec:
+    lookupPolicy:
+      local: false
+    tags:
+    - annotations:
+        openshift.io/imported-from: openshift/postgresql-92-centos7
+      from:
+        kind: DockerImage
+        name: openshift/postgresql-92-centos7
+      generation: 2
+      importPolicy: {}
+      name: latest
+      referencePolicy:
+        type: Source
+  status:
+    dockerImageRepository: docker-registry.default.svc:5000/rascal/my-database
+    tags:
+    - items:
+      - created: "2019-08-06T14:54:05Z"
+        dockerImageReference: openshift/postgresql-92-centos7@sha256:dbd4b6fef477e49bff9703ee70d20a2c48f68023562ebecc264d0b87a7fa270e
+        generation: 2
+        image: sha256:dbd4b6fef477e49bff9703ee70d20a2c48f68023562ebecc264d0b87a7fa270e
+      tag: latest
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
