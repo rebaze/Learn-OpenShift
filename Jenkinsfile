@@ -30,5 +30,11 @@ pipeline {
                 sh 'mvn fabric8:deploy -Popenshift -Dmaven.test.skip' 
             }
         }
+
+        stage ('Rollout') {
+            steps {
+                sh 'oc rollout status dc/fruits -w' 
+            }
+        }
     }
 }
