@@ -58,11 +58,15 @@ The secret resource can hold text or binary secrets for delivery into your pods.
 Machines set up in the cluster to run containers. Usually managed by administrators and not by end users.
 
 
-## Cheat Sheet
+## Cheat Sheet for Rascal Project
 
 1. Login into an openshift instance.
 
     > oc login YOURINSTANCE --token=YOURTOKEN
+
+1. Make sure you are in the right project or switch to it:
+
+    > oc project rascal
 
 1. Create the database resource
 
@@ -83,3 +87,8 @@ Machines set up in the cluster to run containers. Usually managed by administrat
 1. Find endpoint
 
     > oc get routes --selector app=fruits
+
+1. Delete it all again
+
+    > oc delete all  --selector app=fruits
+    > oc delete all  --selector app=my-database
