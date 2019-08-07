@@ -76,17 +76,13 @@ Machines set up in the cluster to run containers. Usually managed by administrat
                 -e POSTGRESQL_PASSWORD=secret \
                 -e POSTGRESQL_DATABASE=my_data \
                 openshift/postgresql-92-centos7 \
-                --name=my-database
-
-    > oc rollout status dc/my-database -w
+                --name=my-database && oc rollout status dc/my-database -w
 
 1. Build and deploy your application 
 
-    > mvn package fabric8:deploy -Popenshift -Dmaven.test.skip
+    > mvn package fabric8:deploy -Popenshift -Dmaven.test.skip && oc rollout status dc/fruits -w
 
-    > oc rollout status dc/fruits -w
-
-1. Find endpoint
+1. Find endpoint & Use application in browser
 
     > oc get routes --selector app=fruits
 
