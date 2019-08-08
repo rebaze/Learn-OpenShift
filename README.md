@@ -1,6 +1,17 @@
 [<img src="http://www.rebaze.com/assets/Rebaze_icon_colors_tbg.png" align="right" width="100">](http://rebaze.com)
 
-# An opinionated primer for OpenShift 
+# OpenShift By Example
+
+An opinionated primer for OpenShift with Java based microservices and a simple Jenkins based build and deployment pipeline.
+
+Technology used here:
+
+* Rehat Openshift 3.x and 4.x
+* Jenkins
+* Java 8
+* Fabic8 Maven Plugin
+* Spring Boot 2.x
+* Postgresql
 
 ## Important external references
 
