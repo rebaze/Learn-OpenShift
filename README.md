@@ -13,11 +13,12 @@ Technology used here:
 * Spring Boot 2.x
 * Postgresql
 
-## Important external references
+## Useful external references
 
 * https://learn.openshift.com (an interactive learning tutorial)
 * https://manage.openshift.com (Openshift Online for instant access to a OpenShift Instance)
 * https://github.com/openshift-katacoda/rhoar-getting-started (Initial example code taken from here)
+* https://kubefwd.com/ (Kubernetes bulk service port-forwarding)
 
 ## Concepts
 
