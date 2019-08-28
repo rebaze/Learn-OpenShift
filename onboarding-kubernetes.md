@@ -10,15 +10,22 @@
 
 * Adopt JenkinsX -> Opinionated workflows
 
-## Installing Jenkins using Helm
+## GKE specifics
 
-* Make sure we have enough nodes (e.g. using an autoscaling node-pool)
+* Console http://console.cloud.google.com
+
+## Install Helm and Tiller
+
 * Install Helm. Recommdation: use local tiller because default installation is not secure: 
     ```
     tiller -listen=localhost:44134 -storage=secret -logtostderr
     export HELM_HOST=localhost:44134
     helm init --client-only
     ```
+
+## Installing Jenkins using Helm
+
+* Make sure we have enough nodes (e.g. using an autoscaling node-pool)
 
 * run helm install --name my-release stable/jenkins
 
@@ -37,4 +44,8 @@
     For more information on running Jenkins on Kubernetes, visit:
     https://cloud.google.com/solutions/jenkins-on-container-engine
     ```
-* TBD
+
+## ELK Stack
+
+> helm install --name elk stable/elastic-stack
+
