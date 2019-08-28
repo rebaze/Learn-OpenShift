@@ -22,6 +22,7 @@ Technology used here:
 
 ## Getting Started
 
+* [Primer](primer.md)
 * [Openshift Onboarding](onboarding-openshift.md)
 * [Kubernetes Onboarding](onboarding-kubernetes.md)
 

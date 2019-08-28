@@ -10,7 +10,7 @@
 
 * Adopt JenkinsX -> Opinionated workflows
 
-## GKE specifics
+    ## GKE specifics
 
 * Console http://console.cloud.google.com
 
