@@ -1,0 +1,10 @@
+Master:
+    InstallPlugins:
+    Cpu: "2"
+    Memory: "4Gi"
+    JavaOpts: "Xms1000m -Xmx1000m"
+Agent:
+    Enabled: false
+Persistence:
+    Size: 20Gi
+    

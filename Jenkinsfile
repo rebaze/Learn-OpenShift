@@ -1,7 +1,7 @@
 pipeline {
     environment {
-    PROJECT = "REPLACE_WITH_YOUR_PROJECT_ID"
-    APP_NAME = "gceme"
+    PROJECT = "Golemites"
+    APP_NAME = "fruits"
     FE_SVC_NAME = "${APP_NAME}-frontend"
     CLUSTER = "jenkins-cd"
     CLUSTER_ZONE = "us-east1-d"
@@ -11,7 +11,7 @@ pipeline {
 
     agent {
     kubernetes {
-      label 'sample-app'
+      label 'fruits-app-build'
       defaultContainer 'jnlp'
       yaml """
 apiVersion: v1
@@ -21,10 +21,10 @@ labels:
   component: ci
 spec:
   # Use service account that can deploy to all namespaces
-  serviceAccountName: cd-jenkins
+  # serviceAccountName: cd-jenkins
   containers:
-  - name: golang
-    image: golang:1.10
+  - name: maven
+    image: kube_maven:1.10
     command:
     - cat
     tty: true
@@ -41,34 +41,28 @@ spec:
 """
     }
 }
-    tools {
-        maven 'maven'
-        jdk 'jdk8'
-    }
     stages {
         stage ('Initialize') {
             steps {
+                container('maven') {
                 sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                 '''
+                }
             }
         }
 
         stage ('Build') {
             steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true install' 
+                container('maven') {
+                    sh 'mvn -Dmaven.test.failure.ignore=true install' 
+                }
             }
             post {
                 success {
                     junit 'target/surefire-reports/**/*.xml' 
                 }
-            }
-        }
-
-        stage ('Deploy') {
-            steps {
-                sh 'mvn fabric8:deploy -Popenshift -Dmaven.test.skip' 
             }
         }
     }
