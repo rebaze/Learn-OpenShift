@@ -24,7 +24,7 @@ spec:
   # serviceAccountName: cd-jenkins
   containers:
   - name: maven
-    image: kube_maven:1.10
+    image: gcr.io/golemite/github.com/rebaze/openshift-by-example:9908481
     command:
     - cat
     tty: true
