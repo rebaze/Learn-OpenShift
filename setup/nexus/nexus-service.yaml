@@ -10,7 +10,7 @@ metadata:
 spec:
   selector: 
     app: nexus-server
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - port: 8081
       targetPort: 8081
