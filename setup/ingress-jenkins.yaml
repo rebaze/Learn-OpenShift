@@ -4,12 +4,17 @@ metadata:
   name: ingress-jenkins
   annotations:
     kubernetes.io/ingress.class: "nginx"
+    certmanager.k8s.io/cluster-issuer: letsencrypt
 spec:
   rules:
-  - host: jenkins.pipeline.rebaze.io
+  - host: jenkins.fabrik.rebaze.io
     http:
       paths:
       - path: /
         backend:
           serviceName: my-release-jenkins
           servicePort: 8080
+  tls:
+    - hosts:
+      - jenkins.fabrik.rebaze.io
+      secretName: jenkins-cert # < cert-manager will store the created certificate in this secret.

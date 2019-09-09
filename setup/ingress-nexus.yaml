@@ -3,12 +3,11 @@ kind: Ingress
 metadata:
   name: ingress-nexus
   annotations:
-    # use the shared ingress-nginx
     kubernetes.io/ingress.class: "nginx"
     certmanager.k8s.io/cluster-issuer: letsencrypt
 spec:
   rules:
-  - host: nexus.pipeline.rebaze.io
+  - host: nexus.fabrik.rebaze.io
     http:
       paths:
       - path: /
@@ -17,5 +16,5 @@ spec:
           servicePort: 8081
   tls:
     - hosts:
-      - nexus.pipeline.rebaze.io
+      - nexus.fabrik.rebaze.io
       secretName: nexus-cert # < cert-manager will store the created certificate in this secret.
