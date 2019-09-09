@@ -7,7 +7,7 @@
     <mirror>
       <id>central</id>
       <name>central</name>
-      <url>http://nexus.dev.rebaze.io/repository/maven-public/</url>
+      <url>https://nexus.fabrik.rebaze.io/repository/maven-public/</url>
       <mirrorOf>*</mirrorOf>
     </mirror>
   </mirrors>
