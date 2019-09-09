@@ -24,7 +24,7 @@ spec:
   # serviceAccountName: cd-jenkins
   containers:
   - name: maven
-    image: gcr.io/golemite/github.com/rebaze/openshift-by-example:9908481
+    image: gcr.io/golemite/github.com/rebaze/openshift-by-example:efd9753
     command:
     - cat
     tty: true
@@ -48,6 +48,7 @@ spec:
                 sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
+                    cat /usr/share/maven/ref/settings.xml
                 '''
                 }
             }
@@ -56,7 +57,7 @@ spec:
         stage ('Build') {
             steps {
                 container('maven') {
-                    sh 'mvn -Dmaven.test.failure.ignore=true install' 
+                    sh 'mvn -s /usr/share/maven/ref/settings.xml -Dmaven.test.failure.ignore=true install' 
                 }
             }
             post {
