@@ -38,7 +38,7 @@
 		<spring-boot-bom.version>2.1.6.SP3</spring-boot-bom.version>
     <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
     <fabric8-maven-plugin.version>4.2.0</fabric8-maven-plugin.version>
-    <fabric8.openshift.trimImageInContainerSpec>true</fabric8.openshift.trimImageInContainerSpec>
+    <fabric8.openshift.trimImageInContainerSpec>false</fabric8.openshift.trimImageInContainerSpec>
     <fabric8.skip.build.pom>true</fabric8.skip.build.pom>
     <fabric8.generator.from>
       registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:${openjdk18-openshift.version}
