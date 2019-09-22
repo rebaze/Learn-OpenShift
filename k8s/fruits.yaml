@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fruits
+spec:
+  ports:
+  - port: 8080
+    name: http
+  type: ClusterIP
+  selector:
+    app: fruits
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fruits
+spec:
+  selector:
+    matchLabels:
+      app: fruits
+  template:
+    metadata:
+      labels:
+        app: fruits
+    spec:
+      containers:
+      - name: fruits
+        image: gcr.io/golemite/fruits
+        ports:
+          - containerPort: 8080
+---
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   name: ingress-fruits
+#   annotations:
+#     kubernetes.io/ingress.class: "nginx"
+#     certmanager.k8s.io/cluster-issuer: letsencrypt
+# spec:
+#   rules:
+#   - host: fruits.fabrik.rebaze.io
+#     http:
+#       paths:
+#       - path: /
+#         backend:
+#           serviceName: fruits
+#           servicePort: 8080
+#   tls:
+#     - hosts:
+#       - fruits.fabrik.rebaze.io
+#       secretName: fruits-cert # < cert-manager will store the created certificate in this secret.

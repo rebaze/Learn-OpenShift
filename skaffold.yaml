@@ -1,0 +1,13 @@
+apiVersion: skaffold/v1beta14
+kind: Config
+build:
+     artifacts:
+     - image: gcr.io/golemite/fruits
+       context: .
+       jib: {}
+portForward:
+- resourceType: service
+  resourceName: fruits
+  namespace: default  # 
+  port: 8080 # 
+  localPort: 8080 # *Optional*
