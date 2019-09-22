@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-fruits
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    certmanager.k8s.io/cluster-issuer: letsencrypt
+spec:
+  rules:
+  - host: fruits.fabrik.rebaze.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: fruits
+          servicePort: 8080
+  tls:
+    - hosts:
+      - fruits.fabrik.rebaze.io
+      secretName: fruits-cert # < cert-manager will store the created certificate in this secret.
