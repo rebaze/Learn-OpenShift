@@ -24,7 +24,7 @@ spec:
   # serviceAccountName: cd-jenkins
   containers:
   - name: maven
-    image: gcr.io/golemite/fabrik/fabrik-builder-maven:d543915
+            image: gcr.io/golemite/fabrik/fabrik-builder-maven:d543915
     command:
     - cat
     tty: true
@@ -63,14 +63,6 @@ spec:
             post {
                 success {
                     junit 'target/surefire-reports/**/*.xml' 
-                }
-            }
-        }
-
-        stage ('Deploy Image') {
-            steps {
-                container('maven') {
-                    sh 'mvn -s /usr/share/maven/ref/settings.xml -Dmaven.test.failure.ignore=true jib:build -Pjib' 
                 }
             }
         }
